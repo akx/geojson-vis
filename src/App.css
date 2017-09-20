@@ -1,24 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+.App h1, .App h2, .App h3 {
+  margin: 3px 0
+}
+
+body, #root {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.controls {
+  flex: 0;
+  background: #fef;
+  padding: 5px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.map {
+  flex: 1;
+  background: #eff;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.leaflet-container {
+    height: 100%;
+    width: 100%;
 }
