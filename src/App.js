@@ -27,7 +27,12 @@ class App extends Component {
       lat: 60.1699,
       lng: 24.9384,
       zoom: 13,
+      weight: 5,
+      opacity: 0.65,
+      color: '#FF5500',
+      showControls: true,
     };
+    this.getStyle = this.getStyle.bind(this);
   }
 
   loadFromUrl(url) {
@@ -50,24 +55,36 @@ class App extends Component {
   }
 
   getStyle(feature, layer) {
-    return {
-      color: '#006400',
-      weight: 5,
-      opacity: 0.65,
-    }
+    const {color, weight, opacity} = this.state;
+    return {color, weight, opacity};
   }
 
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
       <div className="App">
-        <div className="controls">
+        <div className={"controls" + (!this.state.showControls ? ' hidden' : '')}>
           <h2>Input Data</h2>
           <h3>Load from URL</h3>
           <input type="url" value={this.state.dataUrl} onChange={(e) => this.setState({dataUrl: e.target.value})} />
           <button onClick={() => this.loadFromUrl(this.state.dataUrl)}>Load</button>
           <h3>Use local JSON</h3>
           <input type="file" onChange={(e) => this.loadFromFile(e.target.files[0])} />
+          <h2>Style</h2>
+          <label>
+            <span>Color</span>
+            <input type="color" value={this.state.color} onChange={(e) => this.setState({color: e.target.value})} />
+          </label>
+          <label>
+            <span>Weight</span>
+            <input type="number" value={this.state.weight}
+                   onChange={(e) => this.setState({weight: parseFloat(e.target.value) || 5})} />
+          </label>
+          <label>
+            <span>Opacity</span>
+            <input type="number" value={this.state.opacity} step="0.05" min="0" max="1"
+                   onChange={(e) => this.setState({opacity: parseFloat(e.target.valueAsNumber) || 0.65})} />
+          </label>
         </div>
         <div className="map">
           <Map center={position} zoom={this.state.zoom}>
@@ -78,6 +95,12 @@ class App extends Component {
             {this.state.json ? <GeoJSON data={this.state.json} style={this.getStyle} /> : null}
           </Map>
         </div>
+        <button
+          className="controls-button"
+          title="Show/hide controls"
+          onClick={(e) => this.setState({showControls: !this.state.showControls})}>
+          Controls
+        </button>
       </div>
     );
   }

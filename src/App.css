@@ -1,9 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body, input, label {
+  font-size: 10pt;
+}
+
+
 * {
   box-sizing: border-box;
 }
 
-.App h1, .App h2, .App h3 {
-  margin: 3px 0
+.App h2:first-child {
+  margin-top: 0;
 }
 
 body, #root {
@@ -24,6 +35,19 @@ body, #root {
   padding: 5px;
 }
 
+.controls label {
+  margin-bottom: 5px;
+  display: flex;
+  min-height: 1.5em;
+}
+
+.controls label span {
+  flex: 1;
+}
+.controls label input {
+  flex: 1;
+}
+
 .map {
   flex: 1;
   background: #eff;
@@ -32,4 +56,16 @@ body, #root {
 .leaflet-container {
     height: 100%;
     width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.controls-button {
+  display: block;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  z-index: 90001;
 }
